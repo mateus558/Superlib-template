@@ -44,6 +44,11 @@ Or by passing only the "super" library flag to the compiler:
 g++ main.cpp -o main -lsuperlib
 ```
 
+## Requirements
+- meson==0.56
+- g++>=7
+- doxygen
+
 ## TODO
 
 * **Add tests.**
