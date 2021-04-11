@@ -22,6 +22,8 @@ foreach lib_name : libs_names
   libraries += subproject(lib_name)
 endforeach
 
+subdir('docs')
+
 combined = []
 project_dependencies = []
 id = 0
