@@ -32,8 +32,8 @@ install_headers(project_headers, subdir: project_subdir)
 project_target = library(meson.project_name(), [],
   dependencies: project_dependencies,
   objects: combined,
-  install : true,
-  install_dir : project_install_dir,
+  install: true,
+  install_dir: project_install_dir,
   version: meson.project_version(),
   soversion: '0'
 )
