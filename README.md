@@ -44,4 +44,9 @@ Or by passing only the "super" library flag to the compiler:
 g++ main.cpp -o main -lsuperlib
 ```
 
+## TODO
 
+* **Add tests.**
+* **Add code coverage.**
+* **Add trevor CI.**
+* **Add docs generation with doxygen.**
