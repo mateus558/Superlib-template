@@ -4,36 +4,29 @@ project('superlib', 'cpp',
 
 libs_names = ['liba', 'libb', 'libc']
 
-project_description = 'Combination of several libraries into one'
-project_subdir = 'superlib'
 prefix = get_option('prefix')
 project_install_dir = get_option('libdir')
 build_type = get_option('buildtype')
 library_type = get_option('default_library')
 
+project_description = 'Combination of several libraries into one'
+project_subdir = 'superlib'
+project_headers = ['superlib.hpp']
+
 message('Build type: ' + build_type)
 message('Install directory: ' + prefix / project_install_dir)
 message('Default library type: ' + library_type)
 
-project_headers = ['superlib.hpp']
-
-libraries = []
+combined = []
+project_dependencies = []
 foreach lib_name : libs_names
-  libraries += subproject(lib_name)
+  lib = subproject(lib_name)
+  lib_name = '_'.join(lib_name.split('-'))
+  combined += lib.get_variable(lib_name+'_tgt').extract_all_objects()
+  project_dependencies += lib.get_variable(lib_name+'_dep')
 endforeach
 
 subdir('docs')
-
-combined = []
-project_dependencies = []
-id = 0
-foreach lib : libraries
-  lib_name = '_'.join(libs_names[id].split('-'))
-  combined += lib.get_variable(lib_name+'_tgt').extract_all_objects()
-  project_dependencies += lib.get_variable(lib_name+'_dep')
-  id += 1
-endforeach
-
 install_headers(project_headers, subdir: project_subdir)
 
 project_target = library(meson.project_name(), [],
