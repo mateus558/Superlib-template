@@ -49,4 +49,3 @@ g++ main.cpp -o main -lsuperlib
 * **Add tests.**
 * **Add code coverage.**
 * **Add trevor CI.**
-* **Add docs generation with doxygen.**
