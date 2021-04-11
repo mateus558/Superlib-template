@@ -12,6 +12,12 @@ This template was created when I needed to combine several libraries subprojects
         - libc
             ...
 ```
+The code bellow is used to install the sample library into the system.
+```
+meson debug --prefix /usr
+meson compile -C debug
+meson install -C debug
+```
 
 ## Compiling code
 
