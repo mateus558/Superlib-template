@@ -4,3 +4,6 @@ debug
 release
 builddir
 build
+cmake-build-debug
+tests
+.idea

@@ -12,6 +12,7 @@ library_type = get_option('default_library')
 project_description = 'Combination of several libraries into one'
 project_subdir = 'superlib'
 project_headers = ['superlib.hpp']
+project_sources = []
 
 message('Build type: ' + build_type)
 message('Install directory: ' + prefix / project_install_dir)
@@ -26,10 +27,9 @@ foreach lib_name : libs_names
   project_dependencies += lib.get_variable(lib_name+'_dep')
 endforeach
 
-subdir('docs')
 install_headers(project_headers, subdir: project_subdir)
 
-project_target = library(meson.project_name(), [],
+project_target = library(meson.project_name(), [project_headers, project_sources],
   dependencies: project_dependencies,
   objects: combined,
   install: true,
@@ -46,6 +46,13 @@ project_target_dep = declare_dependency(
 
 set_variable(meson.project_name() + '_dep', project_target_dep)
 set_variable(meson.project_name() + '_tgt', project_target)
+
+subdir('docs')
+gtest = subproject('gtest').get_variable('gtest_dep')
+
+if gtest.found()
+  subdir('tests')
+endif
 
 pkg_mod = import('pkgconfig')
 pkg_mod.generate(

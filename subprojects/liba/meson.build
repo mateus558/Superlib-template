@@ -12,8 +12,8 @@ install_dir = get_option('libdir')
 
 project_description = 'Library A.'
 project_subdir = 'superlib/liba'
-project_source_files = ['liba.cpp']
-project_headers = ['liba.hpp']
+project_source_files = ['src/liba.cpp']
+project_headers = ['include/liba/liba.hpp']
 project_install = true
 
 message('Build type: ' + build_type)
@@ -26,7 +26,7 @@ lib_args = ['-DBUILDING_LIBA']
 project_target = library(meson.project_name(), [project_source_files, project_headers],
   install : project_install,
   install_dir : install_dir,
-  include_directories : include_directories('.'),
+  include_directories : include_directories('include', 'src', '.'),
   version: meson.project_version(),
   soversion: '0',
   cpp_args : lib_args,

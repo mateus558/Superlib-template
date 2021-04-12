@@ -13,8 +13,8 @@ project_install = true
 
 project_description = 'Library B.'
 project_subdir = 'superlib/libb'
-project_source_files = ['libb.cpp']
-project_headers = ['libb.hpp']
+project_source_files = ['src/libb.cpp']
+project_headers = ['include/libb/libb.hpp']
 
 message('Build type: ' + build_type)
 message('Install directory: ' + prefix / install_dir)
@@ -26,7 +26,7 @@ lib_args = ['-DBUILDING_LIBB']
 project_target = library(meson.project_name(), [project_source_files, project_headers],
   install : project_install,
   install_dir : install_dir,
-  include_directories : include_directories('.'),
+  include_directories : include_directories('include', 'src', '.'),
   version: meson.project_version(),
   soversion: '0',
   cpp_args : lib_args,
@@ -36,7 +36,7 @@ project_target = library(meson.project_name(), [project_source_files, project_he
 install_headers(project_headers, subdir : project_subdir)
 
 project_target_dep = declare_dependency(
-  include_directories: include_directories('.'),
+  include_directories: include_directories('include', 'src', '.'),
   sources: project_headers,
   link_with : project_target,
 )

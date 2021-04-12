@@ -6,17 +6,37 @@ This template was created when I needed to combine several libraries subprojects
 - superlib
     - subprojects
         - liba
-            ...
+            -include
+                -liba
+                    ...
+            -src
+                ...
         - libb
-            ...
+            -include
+                -libb
+                    ...
+            -src
+                ...
         - libc
-            ...
+            -include
+                -libc
+                    ...
+            -src
+                ...
 ```
-The code bellow is used to install the sample library into the system.
+The code bellow is used to install the sample library into the system with meson build system.
 ```
 meson debug --prefix /usr
 meson compile -C debug
 meson install -C debug
+```
+
+Alternatively, you can use cmake build system.
+```
+mkdir debug
+cmake ..
+make
+sudo make install
 ```
 
 ## Compiling code
